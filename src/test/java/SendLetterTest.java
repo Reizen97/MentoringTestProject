@@ -1,9 +1,11 @@
+import base.WebDriverSetUp;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,17 +16,28 @@ import pageobjects.SignInPage;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SendLetterTest {
-    private GoogleMainPage googleMainPage = new GoogleMainPage();
-    private WebDriver driver = googleMainPage.driver;
+    private WebDriverContext webDriverContext;
+
+    private GoogleMainPage googleMainPage;
     private SignInPage signInPage;
+
+    public SendLetterTest(WebDriverContext webDriverContext) {
+        this.webDriverContext = webDriverContext;
+    }
 
     @BeforeEach
     public void openBrowser() {
-        driver.get("https://www.google.com/");
+        webDriverContext = WebDriverContextSetUp.setUpWebDriverContext(webDriverContext);
+    }
+
+    @AfterEach
+    public void closeBrowser() {
+        WebDriverContextSetUp.closeWebDriver(webDriverContext);
     }
 
     @Test
     public void sendLetter() {
+        googleMainPage = webDriverContext.getBasePegeManager().openGoogle();
         googleMainPage.singIn();
         signInPage.inputEmail("ab4180964@gmail.com");
         signInPage.inputPassword("ab<3appels");
@@ -51,5 +64,4 @@ public class SendLetterTest {
 //        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@aria-label='Send (Ctrl-Enter)']")));
 //        driver.findElement(By.xpath("//div[@aria-label='Send (Ctrl-Enter)']")).click();
     }
-
 }

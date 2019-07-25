@@ -6,9 +6,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
-    private WebDriverSetUp webDriverSetUp;
-    public WebDriver driver = webDriverSetUp.getDriver();
-    private WebDriverWait wait = new WebDriverWait(driver, 5);
+    public WebDriver driver;
+    private WebDriverWait wait;
+
+    public BasePage (WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, 5);
+    }
 
     protected void clickToElement(By locator) {
         driver.findElement(locator).click();
