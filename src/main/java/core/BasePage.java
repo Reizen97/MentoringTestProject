@@ -1,4 +1,4 @@
-package pages;
+package core;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,9 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
 import static core.Configuration.TIMEOUT;
+
 
 public class BasePage {
     private static WebDriver driver;
@@ -36,14 +35,14 @@ public class BasePage {
     }
 
     protected WebElement getElement(ExpectedCondition<WebElement> condition) {
-        return (WebElement) wait.until(condition);
+        return wait.until(condition);
     }
 
     protected String getText(WebElement element) {
         return element.getText();
     }
 
-    protected void waitPresantsOfElement(By locator) {
+    protected void waitPresentsOfElement(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 

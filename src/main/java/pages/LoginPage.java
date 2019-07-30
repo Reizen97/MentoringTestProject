@@ -1,8 +1,10 @@
 package pages;
 
+import core.BasePage;
 import org.openqa.selenium.By;
 
-public class LoginPage extends BasePage{
+
+public class LoginPage extends BasePage {
 
     public LoginPage openGmail(String url) {
         getUrl(url);
@@ -10,18 +12,18 @@ public class LoginPage extends BasePage{
     }
 
     public LoginPage inputEmail(String email) {
-        waitPresantsOfElement(By.id("identifierId"));
+        waitPresentsOfElement(By.id("identifierId"));
         inputText(By.id("identifierId"), email);
         waitElementToBeClickable(By.id("identifierNext"));
         clickToElement(By.id("identifierNext"));
         return this;
     }
 
-    public GmailPage inputPassword(String password) {
-        waitPresantsOfElement(By.name("password"));
+    public LoginPage inputPassword(String password) {
+        waitPresentsOfElement(By.name("password"));
         inputText(By.name("password"), password);
         waitElementToBeClickable(By.id("passwordNext"));
         clickToElement(By.id("passwordNext"));
-        return new GmailPage();
+        return this;
     }
 }

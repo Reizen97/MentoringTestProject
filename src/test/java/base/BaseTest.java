@@ -5,8 +5,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static pages.BasePage.getDriver;
-import static pages.BasePage.setDriver;
+import static core.BasePage.getDriver;
+import static core.BasePage.setDriver;
+
 
 public class BaseTest {
 

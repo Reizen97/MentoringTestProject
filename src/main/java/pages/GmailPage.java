@@ -1,11 +1,9 @@
 package pages;
 
+import core.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static core.Configuration.EMAIL;
-import static java.lang.String.format;
 
 public class GmailPage extends BasePage {
 
@@ -16,19 +14,19 @@ public class GmailPage extends BasePage {
     }
 
     public GmailPage inputRecipient(String email) {
-        waitPresantsOfElement(By.name("to"));
+        waitPresentsOfElement(By.name("to"));
         inputText(By.name("to"), email);
         return this;
     }
 
     public GmailPage inputSubject(String subject) {
-        waitPresantsOfElement(By.name("subjectbox"));
+        waitPresentsOfElement(By.name("subjectbox"));
         inputText(By.name("subjectbox"), subject);
         return this;
     }
 
     public GmailPage inputMessage(String message) {
-        waitPresantsOfElement(By.xpath("//div[@aria-label='Message Body']"));
+        waitPresentsOfElement(By.xpath("//div[@aria-label='Message Body']"));
         inputText(By.xpath("//div[@aria-label='Message Body']"), message);
         return this;
     }
@@ -36,15 +34,13 @@ public class GmailPage extends BasePage {
     public GmailPage sendMessage() {
         waitElementToBeClickable(By.xpath("//div[text()='Send']"));
         clickToElement(By.xpath("//div[text()='Send']"));
-        waitPresantsOfElement(By.xpath("//*[text()='Message sent.']"));
+        waitPresentsOfElement(By.xpath("//*[text()='Message sent.']"));
         return this;
     }
 
-    public String getSenderOfLastMessage() {
-        String locator = format("(//span[@email='%s'])[2]", EMAIL);
-        return getText(getElement
-                (ExpectedConditions.presenceOfElementLocated
-                        (By.xpath(locator))));
+    public String getSubjectOfLastMessage() {
+        return getText(
+                getElement(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//tr[1]/td[6]/div/div/div"))));
     }
-
 }
