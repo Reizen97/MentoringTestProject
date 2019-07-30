@@ -1,6 +1,6 @@
-package pages;
+package com.mentoring.ui.gmail;
 
-import core.BasePage;
+import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 

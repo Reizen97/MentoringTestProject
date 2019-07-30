@@ -1,12 +1,10 @@
-package base;
+package com.mentoring.ui;
 
+import com.mentoring.core.ConciseAPI;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import static core.BasePage.getDriver;
-import static core.BasePage.setDriver;
 
 
 public class BaseTest {
@@ -14,12 +12,12 @@ public class BaseTest {
     @BeforeEach
     private void setUp() {
         WebDriverManager.chromedriver().setup();
-        setDriver(new ChromeDriver());
+        ConciseAPI.setDriver(new ChromeDriver());
     }
 
     @AfterEach
     public void tearDown() {
-        getDriver().close();
-        getDriver().quit();
+        ConciseAPI.getDriver().close();
+        ConciseAPI.getDriver().quit();
     }
 }

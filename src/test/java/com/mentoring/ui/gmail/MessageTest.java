@@ -1,14 +1,14 @@
-package gmail;
+package com.mentoring.ui.gmail;
 
-import base.BaseTest;
+import com.mentoring.ui.BaseTest;
+import com.mentoring.ui.gmail.GmailPage;
+import com.mentoring.ui.gmail.LoginPage;
 import org.junit.jupiter.api.Test;
-import pages.GmailPage;
-import pages.LoginPage;
 
 import java.time.LocalDateTime;
 
-import static core.Configuration.EMAIL;
-import static core.Configuration.PASSWORD;
+import static com.mentoring.core.Configuration.EMAIL;
+import static com.mentoring.core.Configuration.PASSWORD;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

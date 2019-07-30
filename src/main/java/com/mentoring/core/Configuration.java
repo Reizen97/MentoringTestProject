@@ -1,4 +1,4 @@
-package core;
+package com.mentoring.core;
 
 public class Configuration {
 
