@@ -33,6 +33,10 @@ public class BasePage {
         return element.getText();
     }
 
+    protected String getValue(WebElement element) {
+        return element.getAttribute("href");
+    }
+
     protected void waitPresentsOfElement(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }

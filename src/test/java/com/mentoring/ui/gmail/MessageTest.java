@@ -1,8 +1,6 @@
 package com.mentoring.ui.gmail;
 
 import com.mentoring.ui.BaseTest;
-import com.mentoring.ui.gmail.GmailPage;
-import com.mentoring.ui.gmail.LoginPage;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -16,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MessageTest extends BaseTest {
 
     @Test
-    public void sendMessage() {
+    public void TestSendMessage() {
 
         LoginPage loginPage = new LoginPage();
         GmailPage gmailPage = new GmailPage();
