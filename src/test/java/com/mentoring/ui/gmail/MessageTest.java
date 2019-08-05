@@ -23,7 +23,7 @@ public class MessageTest extends BaseTest {
                 .inputEmail(EMAIL)
                 .inputPassword(PASSWORD);
 
-        String subject = format("Test %s", LocalDateTime.now().toLocalDate().toString());
+        String subject = format("Test %s", LocalDateTime.now().toString());
 
         gmailPage.createNewLetter()
                 .inputRecipient(EMAIL)
