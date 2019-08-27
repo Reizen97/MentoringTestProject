@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.mentoring.core.ConciseAPI.getDriver;
+import static com.mentoring.core.ConciseAPI.waiter;
 import static com.mentoring.core.Configuration.TIMEOUT;
 
 public class BasePage {
-
-    private WebDriverWait wait =  new WebDriverWait(getDriver(), TIMEOUT);
 
     protected void clickToElement(By locator) {
         getDriver().findElement(locator).click();
@@ -26,7 +26,7 @@ public class BasePage {
     }
 
     protected WebElement getElement(ExpectedCondition<WebElement> condition) {
-        return wait.until(condition);
+        return waiter(condition);
     }
 
     protected String getText(WebElement element) {
@@ -38,10 +38,10 @@ public class BasePage {
     }
 
     protected void waitPresentsOfElement(By locator) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        waiter(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     protected void waitElementToBeClickable(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
+        waiter(ExpectedConditions.elementToBeClickable(locator));
     }
 }

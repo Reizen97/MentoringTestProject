@@ -15,9 +15,9 @@ public class BaseTest {
         ConciseAPI.setDriver(new ChromeDriver());
     }
 
-//    @AfterEach
-//    public void tearDown() {
-//        ConciseAPI.getDriver().close();
-//        ConciseAPI.getDriver().quit();
-//    }
+    @AfterEach
+    public void tearDown() {
+        ConciseAPI.getDriver().close();
+        ConciseAPI.getDriver().quit();
+    }
 }
