@@ -2,6 +2,9 @@ package com.mentoring.ui.google;
 
 import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class SearchPage extends BasePage {
 

@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 import static com.mentoring.core.ConciseAPI.getDriver;
 import static com.mentoring.core.ConciseAPI.waiter;
 import static com.mentoring.core.Configuration.TIMEOUT;
@@ -18,7 +20,9 @@ public class BasePage {
     }
 
     protected void inputText(By locator, String text) {
-        getDriver().findElement(locator).sendKeys(text);
+        WebElement element = getDriver().findElement(locator);
+        element.clear();
+        element.sendKeys(text);
     }
 
     protected void getUrl(String url) {
@@ -27,6 +31,11 @@ public class BasePage {
 
     protected WebElement getElement(ExpectedCondition<WebElement> condition) {
         return waiter(condition);
+    }
+
+    protected List<WebElement> getListOfElements(By locator) {
+        waiter(ExpectedConditions.presenceOfElementLocated(locator));
+        return getDriver().findElements(locator);
     }
 
     protected String getText(WebElement element) {

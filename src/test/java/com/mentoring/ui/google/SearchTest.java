@@ -18,6 +18,9 @@ public class SearchTest extends BaseTest {
                 .inputSearchQuery("selenium")
                 .startSearch();
 
+        int numberOfResults = resultsPage.getNumberOfResults();
+        assertEquals(10, numberOfResults);
+
         String actualFirstUrl = resultsPage.getUrlFromFirstResult();
 
         assertEquals("https://www.seleniumhq.org/", actualFirstUrl);
