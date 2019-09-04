@@ -3,26 +3,22 @@ package com.mentoring.ui.gmail;
 import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 
+import static com.mentoring.core.ConciseAPI.clickToElement;
+import static com.mentoring.core.ConciseAPI.inputText;
+
 
 public class LoginPage extends BasePage {
 
-    public LoginPage openGmail(String url) {
-        getUrl(url);
-        return this;
-    }
-
     public LoginPage inputEmail(String email) {
-        waitPresentsOfElement(By.id("identifierId"));
+
         inputText(By.id("identifierId"), email);
-        waitElementToBeClickable(By.id("identifierNext"));
         clickToElement(By.id("identifierNext"));
         return this;
     }
 
     public LoginPage inputPassword(String password) {
-        waitPresentsOfElement(By.name("password"));
+
         inputText(By.name("password"), password);
-        waitElementToBeClickable(By.id("passwordNext"));
         clickToElement(By.id("passwordNext"));
         return this;
     }

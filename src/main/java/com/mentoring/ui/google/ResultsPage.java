@@ -2,25 +2,25 @@ package com.mentoring.ui.google;
 
 import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static com.mentoring.core.ConciseAPI.clickToElement;
+import static com.mentoring.core.ConciseAPI.getAttribute;
+import static com.mentoring.core.ConciseAPI.getListOfElements;
 
 
 public class ResultsPage extends BasePage {
 
     public String getUrlFromFirstResult() {
-        return getValue(getElement(ExpectedConditions.presenceOfElementLocated(
-                By.cssSelector("div > link"))));
+        return getAttribute(By.cssSelector("div > link"), "href");
     }
 
     public ResultsPage openFirstResult() {
-        waitElementToBeClickable(By.xpath("//div/link/../div/div/div/a"));
+
         clickToElement(By.xpath("//div/link/../div/div/div/a"));
         return this;
     }
 
     public int getNumberOfResults() {
-
-        return getListOfElements(By.cssSelector("div > link")).size()
-                + getListOfElements(By.cssSelector(".srg > .g")).size();
+        return getListOfElements(By.cssSelector("div.srg > div.g > div")).size();
     }
 }

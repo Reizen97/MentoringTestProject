@@ -3,19 +3,21 @@ package com.mentoring.ui.google;
 import com.mentoring.ui.BaseTest;
 import org.junit.jupiter.api.Test;
 
+import static com.mentoring.core.ConciseAPI.openUrl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchTest extends BaseTest {
 
     @Test
-    public void TestSearchResults() {
+    public void testSearchResults() {
 
         SearchPage searchPage = new SearchPage();
         ResultsPage resultsPage = new ResultsPage();
         SeleniumPage seleniumPage = new SeleniumPage();
 
-        searchPage.openGoogle("https://www.google.com/")
-                .inputSearchQuery("selenium")
+        openUrl("https://www.google.com/");
+
+        searchPage.inputSearchQuery("selenium")
                 .startSearch();
 
         int numberOfResults = resultsPage.getNumberOfResults();
