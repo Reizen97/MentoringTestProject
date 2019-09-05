@@ -37,7 +37,7 @@ public final class ConciseAPI {
         return new FluentWait<>(getDriver())
                 .withTimeout(timeout)
                 .pollingEvery(polling)
-                .ignoring(WebDriverException.class)
+                .ignoring(WebDriverException.class, IndexOutOfBoundsException.class)
                 .until(conditions);
     }
 
@@ -47,8 +47,7 @@ public final class ConciseAPI {
 
     public static void clickToElement(By locator) {
 
-        Actions clickOnElement = new Actions(getDriver());
-        clickOnElement.moveToElement(waitFor(elementToBeClickable(locator))).click().perform();
+        click(waitFor(elementToBeClickable(locator))).perform();
     }
 
     public static void inputText(By locator, String text) {
@@ -73,4 +72,9 @@ public final class ConciseAPI {
         return waitFor(presenceOfElementLocated(locator)).getAttribute(attribute);
     }
 
+    public static Actions click(WebElement element) {
+        return new Actions(getDriver())
+                .moveToElement(element)
+                .click();
+    }
 }

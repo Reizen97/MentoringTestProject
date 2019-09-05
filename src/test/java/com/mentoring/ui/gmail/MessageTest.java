@@ -1,10 +1,8 @@
 package com.mentoring.ui.gmail;
 
-import com.mentoring.ui.BasePage;
 import com.mentoring.ui.BaseTest;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.Calendar;
 
 import static com.mentoring.core.ConciseAPI.openUrl;
@@ -42,5 +40,17 @@ public class MessageTest extends BaseTest {
         String actualResult = gmailPage.getSubjectOfLastMessage();
 
         assertEquals(subject, actualResult);
+    }
+
+    @Test
+    public void test() {
+
+        LoginPage loginPage = new LoginPage();
+        GmailPage gmailPage = new GmailPage();
+
+        openUrl("https://www.google.com/");
+
+        loginPage.openGoogleApps();
+        loginPage.openGmail();
     }
 }

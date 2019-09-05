@@ -11,13 +11,13 @@ public class BaseTest {
 
     @BeforeEach
     private void setUp() {
+
         WebDriverManager.chromedriver().setup();
         ConciseAPI.setDriver(new ChromeDriver());
     }
 
     @AfterEach
     public void tearDown() {
-        ConciseAPI.getDriver().close();
         ConciseAPI.getDriver().quit();
     }
 }
