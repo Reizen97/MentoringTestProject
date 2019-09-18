@@ -6,16 +6,9 @@ import org.openqa.selenium.By;
 import static com.mentoring.core.ConciseAPI.clickToElement;
 import static com.mentoring.core.ConciseAPI.getText;
 import static com.mentoring.core.ConciseAPI.inputText;
-import static com.mentoring.core.ConciseAPI.waitFor;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+
 
 public class LoginTabPage extends BasePage {
-
-    public LoginTabPage acept() {
-
-        clickToElement(By.cssSelector("div.modal-consent__right button.js-consent-accept"));
-        return this;
-    }
 
     public LoginTabPage openLoginFrame() {
 
