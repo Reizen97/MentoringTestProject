@@ -43,7 +43,19 @@ public class GmailPage extends BasePage {
         return this;
     }
 
+    public GmailPage clickOnFirstMessage() {
+
+        clickToElement(By.cssSelector("div.Cp tr:first-child td:nth-child(6)"));
+        return this;
+    }
+
     public String getSubjectOfLastMessage() {
         return getText(By.xpath("//tr[1]/td[6]/div/div/div"));
+    }
+
+    public GmailPage submitRegistration() {
+
+        clickToElement(By.cssSelector("div.h7.ie.nH.oy8Mbf div.a3s.aXjCH a:nth-child(2)"));
+        return this;
     }
 }

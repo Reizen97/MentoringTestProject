@@ -20,7 +20,7 @@ public class MessageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         GmailPage gmailPage = new GmailPage();
 
-        openUrl("https://www.google.com/");
+        openUrl("https://www.google.com.nr/");
 
         loginPage.singIn();
 
@@ -40,17 +40,5 @@ public class MessageTest extends BaseTest {
         String actualResult = gmailPage.getSubjectOfLastMessage();
 
         assertEquals(subject, actualResult);
-    }
-
-    @Test
-    public void test() {
-
-        LoginPage loginPage = new LoginPage();
-        GmailPage gmailPage = new GmailPage();
-
-        openUrl("https://www.google.com/");
-
-        loginPage.openGoogleApps();
-        loginPage.openGmail();
     }
 }
