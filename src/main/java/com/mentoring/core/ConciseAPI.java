@@ -47,7 +47,8 @@ public final class ConciseAPI {
 
     public static void clickToElement(By locator) {
 
-        click(waitFor(elementToBeClickable(locator))).perform();
+        action().moveToElement(waitFor(elementToBeClickable(locator)))
+                .click().perform();
     }
 
     public static void inputText(By locator, String text) {
@@ -72,9 +73,7 @@ public final class ConciseAPI {
         return waitFor(presenceOfElementLocated(locator)).getAttribute(attribute);
     }
 
-    public static Actions click(WebElement element) {
-        return new Actions(getDriver())
-                .moveToElement(element)
-                .click();
+    public static Actions action() {
+        return new Actions(getDriver());
     }
 }
