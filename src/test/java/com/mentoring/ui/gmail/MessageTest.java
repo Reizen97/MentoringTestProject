@@ -20,14 +20,12 @@ public class MessageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         GmailPage gmailPage = new GmailPage();
 
-        openUrl("https://www.google.com.nr/");
+        openUrl("https://www.google.com/ncr");
 
-        loginPage.singIn();
-
-        loginPage.inputEmail(EMAIL)
-                .inputPassword(PASSWORD);
-
-        loginPage.openGmail();
+        loginPage.singIn()
+                .inputEmail(EMAIL)
+                .inputPassword(PASSWORD)
+                .hoverOn("Gmail");
 
         String subject = format("Test %s", Calendar.getInstance().getTime());
 
@@ -41,4 +39,5 @@ public class MessageTest extends BaseTest {
 
         assertEquals(subject, actualResult);
     }
+
 }

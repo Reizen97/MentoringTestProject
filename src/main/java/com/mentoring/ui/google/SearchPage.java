@@ -2,22 +2,17 @@ package com.mentoring.ui.google;
 
 import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
-import static com.mentoring.core.ConciseAPI.clickToElement;
-import static com.mentoring.core.ConciseAPI.inputText;
+import static com.mentoring.core.ConciseAPI.waitFor;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 
 public class SearchPage extends BasePage {
 
-    public SearchPage inputSearchQuery(String query) {
+    public void inputSearchQuery(String query) {
 
-        inputText(By.cssSelector("input.gsfi"), query);
-        return this;
+        waitFor(elementToBeClickable(By.cssSelector("input.gsfi"))).sendKeys(query + Keys.ENTER);
     }
 
-    public SearchPage startSearch() {
-
-        clickToElement(By.cssSelector("div[jsname='VlcLAe']> center > input:first-child"));
-        return this;
-    }
 }

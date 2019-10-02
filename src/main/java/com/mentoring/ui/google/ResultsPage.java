@@ -3,24 +3,23 @@ package com.mentoring.ui.google;
 import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 
-import static com.mentoring.core.ConciseAPI.clickToElement;
-import static com.mentoring.core.ConciseAPI.getAttribute;
-import static com.mentoring.core.ConciseAPI.getListOfElements;
+import static com.mentoring.core.ConciseAPI.waitFor;
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 
 
 public class ResultsPage extends BasePage {
 
     public String getUrlFromFirstResult() {
-        return getAttribute(By.cssSelector("div > link"), "href");
+        return waitFor(presenceOfElementLocated(By.cssSelector("div > link"))).getAttribute("href");
     }
 
-    public ResultsPage openFirstResult() {
+    public void openFirstResult() {
 
-        clickToElement(By.xpath("//div/link/../div/div/div/a"));
-        return this;
+        waitElementClickability("h3 > div").click();
     }
 
     public int getNumberOfResults() {
-        return getListOfElements(By.cssSelector("div.srg > div.g > div")).size();
+        return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector(".srg > div"))).size();
     }
 }
