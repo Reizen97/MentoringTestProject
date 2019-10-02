@@ -3,46 +3,45 @@ package com.mentoring.ui.kieskeurig;
 import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 
-import static com.mentoring.core.ConciseAPI.clickToElement;
-import static com.mentoring.core.ConciseAPI.getText;
-import static com.mentoring.core.ConciseAPI.inputText;
+import static com.mentoring.core.ConciseAPI.getDriver;
+import static com.mentoring.core.ConciseAPI.waitFor;
 
 
 public class LoginTabPage extends BasePage {
 
     public LoginTabPage openLoginFrame() {
 
-        clickToElement(By.cssSelector("div.site-header__content a.js-show-login"));
+        getDriver().findElement(By.cssSelector("div.site-header__content a.js-show-login")).click();
         return this;
     }
 
     public LoginTabPage openLoginTab() {
 
-        clickToElement(By.cssSelector("a.js-user-login--login-toggle"));
+        getDriver().findElement(By.cssSelector("a.js-user-login--login-toggle")).click();
         return this;
     }
 
     public LoginTabPage inputLogin(String login) {
 
-        inputText(By.name("username"), login);
+        getDriver().findElement(By.name("username")).sendKeys(login);
         return this;
     }
 
     public LoginTabPage inputPassword(String password) {
 
-        inputText(By.cssSelector("form.user-login--login input[name='password']"), password);
+        getDriver().findElement(By.cssSelector("form.user-login--login input[name='password']")).sendKeys(password);
         return this;
     }
 
     public LoginTabPage login() {
 
-        clickToElement(By.cssSelector("form.js-user-login--login button[type='submit']"));
+        getDriver().findElement(By.cssSelector("form.js-user-login--login button[type='submit']")).click();
 //        waitFor(presenceOfElementLocated(By.cssSelector("div.msg")));
         return this;
     }
 
     public String getUserName() {
 
-        return getText(By.cssSelector("div.site-header__content a.js-username"));
+        return getDriver().findElement(By.cssSelector("div.site-header__content a.js-username")).getText();
     }
 }

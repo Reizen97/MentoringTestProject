@@ -23,13 +23,16 @@ public class RegistrationTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         GmailPage gmailPage = new GmailPage();
         LoginTabPage loginTabPage = new LoginTabPage();
+        MainPage mainPage = new MainPage();
 
         openUrl("https://www.kieskeurig.nl/");
 
         String email = format("ab4180964%s%s@gmail.com", "+", Calendar.getInstance().getTime()).replaceAll("( |:)", "");
         String name = Calendar.getInstance().getTime().toString().replaceAll("( |:)", "");
 
-        registerTabPage.acept()
+        mainPage.acept();
+
+        registerTabPage
                 .openLoginFrame()
                 .openRegistrationTab()
                 .inputLogin(name)
@@ -40,17 +43,22 @@ public class RegistrationTest extends BaseTest {
                 .inputVerifyPassword(email)
                 .register();
 
-        openUrl("https://www.gmail.com/");
+        openUrl("https://www.google.com/ncr");
 
-        loginPage.inputEmail(EMAIL)
-                .inputPassword(PASSWORD);
+        loginPage
+                .singIn()
+                .inputEmail(EMAIL)
+                .inputPassword(PASSWORD)
+                .hoverOn("Gmail");
 
-        gmailPage.clickOnFirstMessage()
-                .submitRegistration();
+        gmailPage
+                .clickOnFirstMessageWithSubject("Bevestiging registratie Kieskeurig")
+                .submitRegistration(name);
 
-        openUrl("https://www.kieskeurig.nl/");
+//        openUrl("https://www.kieskeurig.nl/");
 
-        loginTabPage.openLoginFrame()
+        loginTabPage
+                .openLoginFrame()
                 .openLoginTab()
                 .inputLogin(name)
                 .inputPassword(email)

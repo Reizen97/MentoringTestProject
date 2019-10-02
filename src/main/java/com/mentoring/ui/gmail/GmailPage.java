@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 
 import static com.mentoring.core.ConciseAPI.getDriver;
 import static com.mentoring.core.ConciseAPI.waitFor;
+import static java.lang.String.format;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
@@ -43,9 +44,9 @@ public class GmailPage extends BasePage {
         return this;
     }
 
-    public GmailPage clickOnFirstMessage() {
+    public GmailPage clickOnFirstMessageWithSubject(String subject) {
 
-        clickToElement(By.cssSelector("div.Cp tr:first-child td:nth-child(6)"));
+        getDriver().findElement(By.xpath(format("(//span[contains(text(),'%s')])[2]", subject))).click();
         return this;
     }
 
@@ -53,9 +54,9 @@ public class GmailPage extends BasePage {
         return waitFor(visibilityOfElementLocated(By.xpath("//tr[1]/td[6]/div/div/div"))).getText();
     }
 
-    public GmailPage submitRegistration() {
+    public GmailPage submitRegistration(String email) {
 
-        clickToElement(By.cssSelector("div.h7.ie.nH.oy8Mbf div.a3s.aXjCH a:nth-child(2)"));
+        waitFor(elementToBeClickable(By.xpath(format("(//*[contains(@name,'%s')]/ancestor::div[@class='adn ads']/descendant::a)[1]", email)))).click();
         return this;
     }
 }
