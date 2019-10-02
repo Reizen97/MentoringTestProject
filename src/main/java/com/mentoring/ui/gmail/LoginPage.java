@@ -2,24 +2,29 @@ package com.mentoring.ui.gmail;
 
 import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
-import static com.mentoring.core.ConciseAPI.clickToElement;
-import static com.mentoring.core.ConciseAPI.inputText;
+import static com.mentoring.core.ConciseAPI.waitFor;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 
 public class LoginPage extends BasePage {
 
+    public LoginPage singIn() {
+
+        waitFor(elementToBeClickable(By.linkText("Sign in"))).click();
+        return this;
+    }
+
     public LoginPage inputEmail(String email) {
 
-        inputText(By.id("identifierId"), email);
-        clickToElement(By.id("identifierNext"));
+        waitElementClickability("#identifierId").sendKeys(email + Keys.ENTER);
         return this;
     }
 
     public LoginPage inputPassword(String password) {
 
-        inputText(By.name("password"), password);
-        clickToElement(By.id("passwordNext"));
+        waitElementClickability("[name='password']").sendKeys(password + Keys.ENTER);
         return this;
     }
 }
