@@ -49,12 +49,6 @@ public class RegistrationTest extends BaseTest {
                 .inputVerifyPassword(password)
                 .register();
 
-        System.out.println(login);
-        System.out.println(firstName);
-        System.out.println(lastName);
-        System.out.println(email);
-        System.out.println(password);
-
         assertTrue(registerTabPage.isSuccessMessageDisplayed());
 
         openUrl("https://www.google.com/ncr");

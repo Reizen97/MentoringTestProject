@@ -19,7 +19,7 @@ public class MainPage extends BasePage {
 
     public String getActivationMessage() {
 
-        System.out.println(getDriver().getCurrentUrl());
+        System.out.println(getDriver().getWindowHandle());
 
         return waitFor(presenceOfElementLocated(By.cssSelector(".success-message .msg"))).getText();
     }
