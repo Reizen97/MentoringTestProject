@@ -1,22 +1,26 @@
 package com.mentoring.ui.kieskeurig;
 
-import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 
 import static com.mentoring.core.ConciseAPI.getDriver;
+import static com.mentoring.core.ConciseAPI.waitFor;
 import static java.lang.String.format;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class MainPage extends BasePage {
 
-    public MainPage acept() {
+    public MainPage selectCategory(String category) {
 
-        getDriver().findElement(By.cssSelector("div.modal-consent__right button.js-consent-accept")).click();
+        waitFor(elementToBeClickable(By.cssSelector(format("div.cat-tile--single-category a[href='/%s']", category))))
+                .click();
         return this;
     }
 
-    public MainPage selectCategory(String category) {
+    public String getActivationMessage() {
 
-        getDriver().findElement(By.cssSelector(format("div.cat-tile--single-category a[href='/%s']", category))).click();
-        return this;
+        System.out.println(getDriver().getCurrentUrl());
+
+        return waitFor(presenceOfElementLocated(By.cssSelector(".success-message .msg"))).getText();
     }
 }

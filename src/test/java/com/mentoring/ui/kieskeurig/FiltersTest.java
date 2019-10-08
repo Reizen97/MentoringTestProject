@@ -9,8 +9,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.mentoring.core.ConciseAPI.getDriver;
 import static com.mentoring.core.ConciseAPI.openUrl;
+import static com.mentoring.core.Configuration.KIESKEURIG_EMAIL;
+import static com.mentoring.core.Configuration.KIESKEURIG_PASSWORD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 
 public class FiltersTest extends BaseTest {
 
@@ -19,22 +23,30 @@ public class FiltersTest extends BaseTest {
 
         MainPage mainPage = new MainPage();
         ProductPage productPage = new ProductPage();
+        LoginTabPage loginTabPage = new LoginTabPage();
 
         openUrl("https://www.kieskeurig.nl/");
 
-        //TODO Add login
+        mainPage.acept();
 
-        mainPage.acept()
-                .selectCategory("smartphone");
+        mainPage.openLoginFrame();
+        loginTabPage.openLoginTab()
+                .inputLogin(KIESKEURIG_EMAIL)
+                .inputPassword(KIESKEURIG_PASSWORD)
+                .login();
 
-        List<WebElement> products = productPage.sort("Prijs - Aflopend")
-                .getAllProducts();
+        mainPage.selectCategory("smartphone");
 
-        List<String> priceOfSmartphones = products.stream()
-                .map(i -> i.findElement(By.cssSelector("span.price strong")).getText())
-                .collect(Collectors.toList());
+        List<String> priceOfSmartphones = productPage.getPrice(productPage.sort("Prijs - Aflopend")
 
-        List<String> sortedPrices = priceOfSmartphones.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+                .selectFilters("Nokia")
+                .selectSubscription()
+                .selectFilters("5 tot 6 inch")
+                .selectFilters("6 tot 7 inch")
+                .getAllProducts());
+
+        List<String> sortedPrices = priceOfSmartphones.stream()
+                .sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
         assertEquals(priceOfSmartphones, sortedPrices);
     }

@@ -1,6 +1,8 @@
-package com.mentoring.ui.google;
+package com.mentoring.ui.google.search;
 
 import com.mentoring.ui.BaseTest;
+import com.mentoring.ui.google.search.ResultsPage;
+import com.mentoring.ui.google.search.SearchPage;
 import org.junit.jupiter.api.Test;
 
 import static com.mentoring.core.ConciseAPI.getDriver;

@@ -1,4 +1,4 @@
-package com.mentoring.ui;
+package com.mentoring.ui.google;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import org.openqa.selenium.By;
@@ -37,10 +37,4 @@ public class BasePage {
         return waitFor(elementToBeClickable(By.cssSelector(cssSelector)));
     }
 
-    public void waitForAjax() {
-        new WebDriverWait(getDriver(), 180).until((ExpectedCondition<Boolean>) driver -> {
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            return (Boolean) (executor != null ? executor.executeScript("return jQuery.active == 0") : null);
-        });
-    }
 }

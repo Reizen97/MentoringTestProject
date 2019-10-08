@@ -1,6 +1,6 @@
-package com.mentoring.ui.google;
+package com.mentoring.ui.google.search;
 
-import com.mentoring.ui.BasePage;
+import com.mentoring.ui.google.BasePage;
 import org.openqa.selenium.By;
 
 import static com.mentoring.core.ConciseAPI.waitFor;

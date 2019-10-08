@@ -1,6 +1,6 @@
-package com.mentoring.ui.gmail;
+package com.mentoring.ui.google.apps;
 
-import com.mentoring.ui.BasePage;
+import com.mentoring.ui.google.BasePage;
 import org.openqa.selenium.By;
 
 import static com.mentoring.core.ConciseAPI.getDriver;
@@ -57,6 +57,7 @@ public class GmailPage extends BasePage {
     public GmailPage submitRegistration(String email) {
 
         waitFor(elementToBeClickable(By.xpath(format("(//*[contains(@name,'%s')]/ancestor::div[@class='adn ads']/descendant::a)[1]", email)))).click();
+        System.out.println(getDriver().getCurrentUrl());
         return this;
     }
 }

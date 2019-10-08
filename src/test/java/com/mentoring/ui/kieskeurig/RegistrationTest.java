@@ -1,8 +1,9 @@
 package com.mentoring.ui.kieskeurig;
 
+import com.github.javafaker.Faker;
 import com.mentoring.ui.BaseTest;
-import com.mentoring.ui.gmail.GmailPage;
-import com.mentoring.ui.gmail.LoginPage;
+import com.mentoring.ui.google.apps.GmailPage;
+import com.mentoring.ui.google.apps.LoginPage;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
@@ -12,6 +13,7 @@ import static com.mentoring.core.Configuration.EMAIL;
 import static com.mentoring.core.Configuration.PASSWORD;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class RegistrationTest extends BaseTest {
@@ -27,44 +29,54 @@ public class RegistrationTest extends BaseTest {
 
         openUrl("https://www.kieskeurig.nl/");
 
-        String email = format("ab4180964%s%s@gmail.com", "+", Calendar.getInstance().getTime()).replaceAll("( |:)", "");
-        String name = Calendar.getInstance().getTime().toString().replaceAll("( |:)", "");
+        Faker faker = new Faker();
+
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String password = faker.internet().password();
+        String login = faker.lorem().fixedString(8).concat(" " + firstName);
+        String email = format("ab4180964%s@gmail.com", "+".concat(firstName+lastName));
 
         mainPage.acept();
+        mainPage.openLoginFrame();
 
-        registerTabPage
-                .openLoginFrame()
-                .openRegistrationTab()
-                .inputLogin(name)
-                .inputFirstName(name)
-                .inputLastName(name)
+        registerTabPage.openRegistrationTab()
+                .inputLogin(login)
+                .inputFirstName(firstName)
+                .inputLastName(lastName)
                 .inputEmail(email)
-                .inputPassword(email)
-                .inputVerifyPassword(email)
+                .inputPassword(password)
+                .inputVerifyPassword(password)
                 .register();
+
+        System.out.println(login);
+        System.out.println(firstName);
+        System.out.println(lastName);
+        System.out.println(email);
+        System.out.println(password);
+
+        assertTrue(registerTabPage.isSuccessMessageDisplayed());
 
         openUrl("https://www.google.com/ncr");
 
-        loginPage
-                .singIn()
+        loginPage.singIn()
                 .inputEmail(EMAIL)
                 .inputPassword(PASSWORD)
                 .hoverOn("Gmail");
 
-        gmailPage
-                .clickOnFirstMessageWithSubject("Bevestiging registratie Kieskeurig")
-                .submitRegistration(name);
+        gmailPage.clickOnFirstMessageWithSubject("Bevestiging registratie Kieskeurig")
+                .submitRegistration(email.replaceAll("@gmail.com", ""));
 
-//        openUrl("https://www.kieskeurig.nl/");
+        assertEquals("Bedankt voor het activeren van je account. Je account is nu succesvol geactiveerd.",
+                mainPage.getActivationMessage());
 
-        loginTabPage
-                .openLoginFrame()
-                .openLoginTab()
-                .inputLogin(name)
-                .inputPassword(email)
+        mainPage.openLoginFrame();
+        loginTabPage.openLoginTab()
+                .inputLogin(login)
+                .inputPassword(password)
                 .login();
 
         String actualUserName = loginTabPage.getUserName();
-        assertEquals(name, actualUserName);
+        assertEquals(login, actualUserName);
     }
 }

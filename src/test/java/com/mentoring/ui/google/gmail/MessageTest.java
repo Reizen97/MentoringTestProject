@@ -1,6 +1,8 @@
-package com.mentoring.ui.gmail;
+package com.mentoring.ui.google.gmail;
 
 import com.mentoring.ui.BaseTest;
+import com.mentoring.ui.google.apps.GmailPage;
+import com.mentoring.ui.google.apps.LoginPage;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
