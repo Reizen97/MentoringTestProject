@@ -2,9 +2,6 @@ package com.mentoring.ui.kieskeurig;
 
 import com.mentoring.ui.BaseTest;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;

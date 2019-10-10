@@ -1,9 +1,8 @@
-package com.mentoring.ui.google.apps;
+package com.mentoring.ui.google.gmail;
 
 import com.mentoring.ui.google.BasePage;
 import org.openqa.selenium.By;
 
-import static com.mentoring.core.ConciseAPI.getDriver;
 import static com.mentoring.core.ConciseAPI.waitFor;
 import static java.lang.String.format;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -21,32 +20,32 @@ public class GmailPage extends BasePage {
 
     public GmailPage inputRecipient(String email) {
 
-        getDriver().findElement(By.name("to")).sendKeys(email);
+        waitFor(elementToBeClickable(By.name("to"))).sendKeys(email);
         return this;
     }
 
     public GmailPage inputSubject(String subject) {
 
-        getDriver().findElement(By.name("subjectbox")).sendKeys(subject);
+        waitFor(elementToBeClickable(By.name("subjectbox"))).sendKeys(subject);
         return this;
     }
 
     public GmailPage inputMessage(String message) {
 
-        getDriver().findElement(By.xpath("//div[@aria-label='Message Body']")).sendKeys(message);
+        waitFor(elementToBeClickable(By.xpath("//div[@aria-label='Message Body']"))).sendKeys(message);
         return this;
     }
 
     public GmailPage sendMessage() {
 
-        getDriver().findElement(By.xpath("//div[text()='Send']")).click();
+        waitFor(elementToBeClickable(By.xpath("//div[text()='Send']"))).click();
         waitFor(presenceOfElementLocated(By.xpath("//*[text()='Message sent.']")));
         return this;
     }
 
     public GmailPage clickOnFirstMessageWithSubject(String subject) {
 
-        getDriver().findElement(By.xpath(format("(//span[contains(text(),'%s')])[2]", subject))).click();
+        waitFor(elementToBeClickable(By.xpath(format("(//span[contains(text(),'%s')])[2]", subject)))).click();
         return this;
     }
 

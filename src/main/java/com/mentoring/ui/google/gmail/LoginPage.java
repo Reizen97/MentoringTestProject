@@ -1,4 +1,4 @@
-package com.mentoring.ui.google.apps;
+package com.mentoring.ui.google.gmail;
 
 import com.mentoring.ui.google.BasePage;
 import org.openqa.selenium.By;

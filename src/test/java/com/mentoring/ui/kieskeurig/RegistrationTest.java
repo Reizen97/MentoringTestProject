@@ -2,11 +2,9 @@ package com.mentoring.ui.kieskeurig;
 
 import com.github.javafaker.Faker;
 import com.mentoring.ui.BaseTest;
-import com.mentoring.ui.google.apps.GmailPage;
-import com.mentoring.ui.google.apps.LoginPage;
+import com.mentoring.ui.google.gmail.GmailPage;
+import com.mentoring.ui.google.gmail.LoginPage;
 import org.junit.jupiter.api.Test;
-
-import java.util.Calendar;
 
 import static com.mentoring.core.ConciseAPI.openUrl;
 import static com.mentoring.core.ConciseAPI.switchToTab;
@@ -14,7 +12,6 @@ import static com.mentoring.core.Configuration.EMAIL;
 import static com.mentoring.core.Configuration.PASSWORD;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class RegistrationTest extends BaseTest {

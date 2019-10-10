@@ -4,10 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static com.mentoring.core.ConciseAPI.action;
@@ -58,6 +55,7 @@ public class ProductPage extends BasePage {
     }
 
     public List<Double> getPrice(List<WebElement> products) {
+
         return products.stream()
                 .filter(i->i.getText().contains("v.a."))
                 .map(i -> Double.valueOf(i.findElement(By.cssSelector("span.price strong")).getText()
@@ -78,6 +76,7 @@ public class ProductPage extends BasePage {
     }
 
     public List<Double> getReviewScore(List<WebElement> products) {
+
         return products.stream()
                 .filter(i->i.findElements(By.cssSelector(".rating .label")).size() > 0)
                 .map(i -> Double.valueOf(i.findElement(By.cssSelector(".rating .label")).getText().replaceAll(",", ".")))
