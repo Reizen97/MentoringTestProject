@@ -59,8 +59,8 @@ public class RegisterTabPage extends BasePage {
         return this;
     }
 
-    public boolean isSuccessMessageDisplayed() {
+    public String getSuccessMessage() {
 
-        return (getDriver().findElements(By.cssSelector(".modal-success-message .msg")).size() == 1);
+        return waitFor(presenceOfElementLocated(By.cssSelector("div.msg"))).getText();
     }
 }

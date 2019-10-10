@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 
 import static com.mentoring.core.ConciseAPI.openUrl;
+import static com.mentoring.core.ConciseAPI.switchToTab;
 import static com.mentoring.core.Configuration.EMAIL;
 import static com.mentoring.core.Configuration.PASSWORD;
 import static java.lang.String.format;
@@ -34,7 +35,7 @@ public class RegistrationTest extends BaseTest {
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String password = faker.internet().password();
-        String login = faker.lorem().fixedString(8).concat(" " + firstName);
+        String login = faker.lorem().fixedString(8).concat(firstName);
         String email = format("ab4180964%s@gmail.com", "+".concat(firstName+lastName));
 
         mainPage.acept();
@@ -49,7 +50,8 @@ public class RegistrationTest extends BaseTest {
                 .inputVerifyPassword(password)
                 .register();
 
-        assertTrue(registerTabPage.isSuccessMessageDisplayed());
+        assertEquals("Je account is aangemaakt, je ontvangt direct een mail waarin je jouw account kunt bevestigen.",
+                registerTabPage.getSuccessMessage());
 
         openUrl("https://www.google.com/ncr");
 
@@ -61,12 +63,14 @@ public class RegistrationTest extends BaseTest {
         gmailPage.clickOnFirstMessageWithSubject("Bevestiging registratie Kieskeurig")
                 .submitRegistration(email.replaceAll("@gmail.com", ""));
 
+        switchToTab(1);
+
         assertEquals("Bedankt voor het activeren van je account. Je account is nu succesvol geactiveerd.",
                 mainPage.getActivationMessage());
 
         mainPage.openLoginFrame();
         loginTabPage.openLoginTab()
-                .inputLogin(login)
+                .inputLogin(email)
                 .inputPassword(password)
                 .login();
 

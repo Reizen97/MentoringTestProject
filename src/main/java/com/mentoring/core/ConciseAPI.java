@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.mentoring.core.Configuration.POLLING;
@@ -47,8 +48,9 @@ public final class ConciseAPI {
     }
 
     public static void openUrl(String url) {
-        getDriver().get(url);
+
         getDriver().manage().window().maximize();
+        getDriver().get(url);
     }
 
     public static Actions action() {
@@ -57,6 +59,13 @@ public final class ConciseAPI {
     }
 
     public static void executeJavaScript(String script) {
+
         ((JavascriptExecutor) getDriver()).executeScript(script);
+    }
+
+    public static void switchToTab(int index) {
+
+        ArrayList<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs.get(index));
     }
 }

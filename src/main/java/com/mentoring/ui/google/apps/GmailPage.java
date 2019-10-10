@@ -57,7 +57,6 @@ public class GmailPage extends BasePage {
     public GmailPage submitRegistration(String email) {
 
         waitFor(elementToBeClickable(By.xpath(format("(//*[contains(@name,'%s')]/ancestor::div[@class='adn ads']/descendant::a)[1]", email)))).click();
-        System.out.println(getDriver().getWindowHandle());
         return this;
     }
 }

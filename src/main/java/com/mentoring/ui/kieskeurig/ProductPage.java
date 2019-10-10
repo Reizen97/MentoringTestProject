@@ -3,7 +3,11 @@ package com.mentoring.ui.kieskeurig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static com.mentoring.core.ConciseAPI.action;
@@ -11,6 +15,7 @@ import static com.mentoring.core.ConciseAPI.getDriver;
 import static com.mentoring.core.ConciseAPI.waitFor;
 import static java.lang.String.format;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -44,15 +49,38 @@ public class ProductPage extends BasePage {
     public List<WebElement> getAllProducts() {
 
         do {
+            getDriver().navigate().refresh();
             action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination")))).build().perform();
-        } while (getDriver().findElements(By.id("js-product-list-scroll-detection")).size() == 1);
+        } while (waitFor(invisibilityOfElementLocated
+                (By.id("js-product-list-scroll-detection")), Duration.ofSeconds(60), Duration.ofSeconds(2)).equals(false));
 
         return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector("div.js-product-lists article.product-tile.js-product")));
     }
 
-    public List<String> getPrice(List<WebElement> products) {
+    public List<Double> getPrice(List<WebElement> products) {
         return products.stream()
-                .map(i -> i.findElement(By.cssSelector("span.price strong")).getText().replaceAll("€ ",""))
+                .filter(i->i.getText().contains("v.a."))
+                .map(i -> Double.valueOf(i.findElement(By.cssSelector("span.price strong")).getText()
+                        .replaceAll("€ ","").replaceAll(",", ".")))
+                .collect(Collectors.toList());
+    }
+
+    public ProductPage showAllFilters(String filterName) {
+
+        action().moveToElement(waitFor(elementToBeClickable(
+                By.xpath(format("(//*[contains(text(),'%s')]/../following-sibling::*/descendant::a[@class='filter-expand'])[1]",
+                        filterName)))))
+                .click()
+                .build()
+                .perform();
+
+        return this;
+    }
+
+    public List<Double> getReviewScore(List<WebElement> products) {
+        return products.stream()
+                .filter(i->i.findElements(By.cssSelector(".rating .label")).size() > 0)
+                .map(i -> Double.valueOf(i.findElement(By.cssSelector(".rating .label")).getText().replaceAll(",", ".")))
                 .collect(Collectors.toList());
     }
 }
