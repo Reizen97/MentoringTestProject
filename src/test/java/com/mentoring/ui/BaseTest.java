@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class BaseTest {
 
     @BeforeEach
-    private void setUp() {
+    public void setUp() {
 
         WebDriverManager.chromedriver().setup();
         ConciseAPI.setDriver(new ChromeDriver());

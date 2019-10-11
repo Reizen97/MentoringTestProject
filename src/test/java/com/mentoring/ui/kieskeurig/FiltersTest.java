@@ -66,13 +66,14 @@ public class FiltersTest extends BaseTest {
 
         mainPage.selectCategory("wasmachine");
 
-        List<Double> reviewScore = productPage.getReviewScore(productPage.sort("Reviewscore")
-                .showAllFilters("Merken")
-                .selectFilters("Zanussi")
-                .getAllProducts());
+        List<Double> reviewScore = productPage.sort("Reviewscore")
+                                              .showAllFilters("Merken")
+                                              .selectFilters("Zanussi")
+                                              .getReviewScore();
 
         List<Double> sortedReviewScore = reviewScore.stream()
-                .sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
 
         assertEquals(reviewScore, sortedReviewScore);
     }

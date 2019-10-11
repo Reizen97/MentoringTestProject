@@ -2,19 +2,15 @@ package com.mentoring.ui.kieskeurig;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.mentoring.core.ConciseAPI.action;
-import static com.mentoring.core.ConciseAPI.getDriver;
-import static com.mentoring.core.ConciseAPI.waitFor;
+import static com.mentoring.core.ConciseAPI.*;
 import static java.lang.String.format;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class ProductPage extends BasePage {
 
@@ -75,11 +71,16 @@ public class ProductPage extends BasePage {
         return this;
     }
 
-    public List<Double> getReviewScore(List<WebElement> products) {
+    public List<Double> getReviewScore() {
 
-        return products.stream()
-                .filter(i->i.findElements(By.cssSelector(".rating .label")).size() > 0)
-                .map(i -> Double.valueOf(i.findElement(By.cssSelector(".rating .label")).getText().replaceAll(",", ".")))
+        return waitFor(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#products .rating .label"))).stream()
+                .map(WebElement::getText)
+                .map(ProductPage::replace)
+                .map(Double::parseDouble)
                 .collect(Collectors.toList());
+    }
+
+    public static String replace(String string) {
+        return string.replace(",",".");
     }
 }
