@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FiltersTest extends BaseTest {
 
     @Test
-    public void filterPriceDescendingTest() {
+    public void testFilterPriceDescending() {
 
         MainPage mainPage = new MainPage();
         ProductPage productPage = new ProductPage();
@@ -48,7 +48,7 @@ public class FiltersTest extends BaseTest {
     }
 
     @Test
-    public void filterReviewScoreTest() {
+    public void testFilterReviewScore() {
 
         MainPage mainPage = new MainPage();
         ProductPage productPage = new ProductPage();

@@ -49,7 +49,6 @@ public final class ConciseAPI {
 
     public static void openUrl(String url) {
 
-        getDriver().manage().window().maximize();
         getDriver().get(url);
     }
 
