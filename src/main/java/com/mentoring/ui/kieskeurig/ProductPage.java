@@ -44,12 +44,24 @@ public class ProductPage extends BasePage {
     }
 
     public List<WebElement> getAllProducts() {
+//
+//        do {
+////            getDriver().navigate().refresh();
+//            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination")))).build().perform();
+//        } while (waitFor(invisibilityOfElementLocated
+//                (By.id("js-product-list-scroll-detection")), Duration.ofSeconds(60), Duration.ofSeconds(2)).equals(false));
+
+        String url1;
+        String url2;
 
         do {
-            getDriver().navigate().refresh();
-            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination")))).build().perform();
-        } while (waitFor(invisibilityOfElementLocated
-                (By.id("js-product-list-scroll-detection")), Duration.ofSeconds(60), Duration.ofSeconds(2)).equals(false));
+            url1 = getDriver().getCurrentUrl();
+            System.out.println(url1);
+            action().moveToElement(waitFor(visibilityOfElementLocated(By.id("js-product-list-scroll-detection")))).build().perform();
+            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector(".site-footer__copyright")))).build().perform();
+            url2 = getDriver().getCurrentUrl();
+            System.out.println(url2);
+        } while (!url1.equals(url2) && waitFor(visibilityOfElementLocated(By.id("js-product-list-scroll-detection"))).isEnabled());
 
         return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector("div.js-product-lists article.product-tile.js-product")));
     }
