@@ -82,4 +82,10 @@ public class ProductPage extends BasePage {
                 .map(i -> Double.valueOf(i.findElement(By.cssSelector(".rating .label")).getText().replaceAll(",", ".")))
                 .collect(Collectors.toList());
     }
+
+    public int getNumbersOfResults() {
+
+        return Integer.valueOf(waitFor(visibilityOfElementLocated(By.cssSelector(".results")))
+                .getText().replaceAll("[a-zA-Z]", "").trim());
+    }
 }

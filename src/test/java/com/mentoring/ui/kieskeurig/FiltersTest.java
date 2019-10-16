@@ -2,6 +2,8 @@ package com.mentoring.ui.kieskeurig;
 
 import com.mentoring.ui.BaseTest;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebElement;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,5 +77,24 @@ public class FiltersTest extends BaseTest {
                 .sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
         assertEquals(reviewScore, sortedReviewScore);
+    }
+
+    @Test
+    public void testNumbersOfResult() {
+
+        MainPage mainPage = new MainPage();
+        ProductPage productPage = new ProductPage();
+
+        openUrl("https://www.kieskeurig.nl/");
+
+        mainPage.acept();
+
+        mainPage.selectCategory("espressomachine");
+
+        List<WebElement> allResults = productPage.getAllProducts();
+
+        int expectedNumberOfResults = productPage.getNumbersOfResults();
+
+        assertEquals(expectedNumberOfResults, allResults.size());
     }
 }
