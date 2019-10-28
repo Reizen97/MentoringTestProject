@@ -68,10 +68,10 @@ public class FiltersTest extends BaseTest {
 
         mainPage.selectCategory("wasmachine");
 
-        List<Double> reviewScore = productPage.getReviewScore(productPage.sort("Reviewscore")
+        List<Double> reviewScore = productPage.sort("Reviewscore")
                 .showAllFilters("Merken")
                 .selectFilters("Zanussi")
-                .getAllProducts());
+                .getReviewScore();
 
         List<Double> sortedReviewScore = reviewScore.stream()
                 .sorted(Comparator.reverseOrder()).collect(Collectors.toList());

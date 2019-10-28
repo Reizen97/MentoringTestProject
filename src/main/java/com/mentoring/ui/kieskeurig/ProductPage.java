@@ -2,6 +2,7 @@ package com.mentoring.ui.kieskeurig;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 import java.util.List;
@@ -44,24 +45,13 @@ public class ProductPage extends BasePage {
     }
 
     public List<WebElement> getAllProducts() {
-//
-//        do {
-////            getDriver().navigate().refresh();
-//            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination")))).build().perform();
-//        } while (waitFor(invisibilityOfElementLocated
-//                (By.id("js-product-list-scroll-detection")), Duration.ofSeconds(60), Duration.ofSeconds(2)).equals(false));
-
-        String url1;
-        String url2;
 
         do {
-            url1 = getDriver().getCurrentUrl();
-            System.out.println(url1);
-            action().moveToElement(waitFor(visibilityOfElementLocated(By.id("js-product-list-scroll-detection")))).build().perform();
-            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector(".site-footer__copyright")))).build().perform();
-            url2 = getDriver().getCurrentUrl();
-            System.out.println(url2);
-        } while (!url1.equals(url2) && waitFor(visibilityOfElementLocated(By.id("js-product-list-scroll-detection"))).isEnabled());
+            getDriver().navigate().refresh();
+            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination")))).build().perform();
+        } while (waitFor(invisibilityOfElementLocated
+                (By.id("js-product-list-scroll-detection")), Duration.ofSeconds(60), Duration.ofSeconds(2)).equals(false));
+
 
         return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector("div.js-product-lists article.product-tile.js-product")));
     }
@@ -87,12 +77,17 @@ public class ProductPage extends BasePage {
         return this;
     }
 
-    public List<Double> getReviewScore(List<WebElement> products) {
+    public List<Double> getReviewScore() {
 
-        return products.stream()
-                .filter(i->i.findElements(By.cssSelector(".rating .label")).size() > 0)
-                .map(i -> Double.valueOf(i.findElement(By.cssSelector(".rating .label")).getText().replaceAll(",", ".")))
+        return waitFor(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#products .rating .label"))).stream()
+                .map(WebElement::getText)
+                .map(ProductPage::replace)
+                .map(Double::parseDouble)
                 .collect(Collectors.toList());
+    }
+
+    public static String replace(String string) {
+        return string.replace(",",".");
     }
 
     public int getNumbersOfResults() {
