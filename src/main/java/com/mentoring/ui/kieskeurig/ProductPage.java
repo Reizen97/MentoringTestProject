@@ -47,10 +47,8 @@ public class ProductPage extends BasePage {
     public List<WebElement> getAllProducts() {
 
         do {
-            getDriver().navigate().refresh();
-            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination")))).build().perform();
-        } while (waitFor(invisibilityOfElementLocated
-                (By.id("js-product-list-scroll-detection")), Duration.ofSeconds(60), Duration.ofSeconds(2)).equals(false));
+            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector(".site-footer__copyright")))).build().perform();
+        } while (getDriver().findElements(By.id("js-product-list-scroll-detection")).size() > 0);
 
 
         return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector("div.js-product-lists article.product-tile.js-product")));
