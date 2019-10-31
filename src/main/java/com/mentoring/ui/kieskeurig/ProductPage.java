@@ -1,10 +1,10 @@
 package com.mentoring.ui.kieskeurig;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +13,6 @@ import static com.mentoring.core.ConciseAPI.getDriver;
 import static com.mentoring.core.ConciseAPI.waitFor;
 import static java.lang.String.format;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -46,12 +45,16 @@ public class ProductPage extends BasePage {
 
     public List<WebElement> getAllProducts() {
 
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
         do {
-            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector(".site-footer__copyright")))).build().perform();
-        } while (getDriver().findElements(By.id("js-product-list-scroll-detection")).size() > 0);
+            action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination"))))
+                    .moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector(".site-footer__copyright"))))
+                    .build().perform();
+        } while (js.executeScript("return document.getElementsByClassName('pagination__loading').length").toString().equalsIgnoreCase("1"));
 
 
-        return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector("div.js-product-lists article.product-tile.js-product")));
+        return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector("div.js-product-lists>div.products>article.product-tile.js-product")));
     }
 
     public List<Double> getPrice(List<WebElement> products) {
