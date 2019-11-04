@@ -15,7 +15,7 @@ public class UIElementsTest extends BaseTest {
 
         MainPage mainPage = new MainPage();
 
-        openUrl("https://www.kieskeurig.nl/");
+        openUrl(env.url());
 
         mainPage.acept();
 

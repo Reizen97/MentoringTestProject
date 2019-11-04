@@ -1,6 +1,5 @@
 package com.mentoring.ui.kieskeurig;
 
-import com.mentoring.core.PropertyLoader;
 import com.mentoring.ui.BaseTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
@@ -24,7 +23,7 @@ public class FiltersTest extends BaseTest {
         ProductPage productPage = new ProductPage();
         LoginTabPage loginTabPage = new LoginTabPage();
 
-        openUrl(PropertyLoader.config.kieskeurigUrl());
+        openUrl(env.url());
 
         mainPage.acept();
 
@@ -57,7 +56,7 @@ public class FiltersTest extends BaseTest {
         ProductPage productPage = new ProductPage();
         LoginTabPage loginTabPage = new LoginTabPage();
 
-        openUrl(PropertyLoader.config.kieskeurigUrl());
+        openUrl(env.url());
 
         mainPage.acept();
 
@@ -86,7 +85,7 @@ public class FiltersTest extends BaseTest {
         MainPage mainPage = new MainPage();
         ProductPage productPage = new ProductPage();
 
-        openUrl(PropertyLoader.config.kieskeurigUrl());
+        openUrl(env.url());
 
         mainPage.acept();
 

@@ -25,7 +25,7 @@ public class RegistrationTest extends BaseTest {
         LoginTabPage loginTabPage = new LoginTabPage();
         MainPage mainPage = new MainPage();
 
-        openUrl("https://www.kieskeurig.nl/");
+        openUrl(env.url());
 
         Faker faker = new Faker();
 

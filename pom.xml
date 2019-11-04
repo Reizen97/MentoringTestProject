@@ -31,7 +31,6 @@
 
     <properties>
         <runSuite>**/*Suite.java</runSuite>
-        <env>dev</env>
     </properties>
 
     <dependencies>
