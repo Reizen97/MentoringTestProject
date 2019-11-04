@@ -1,9 +1,10 @@
 package com.mentoring.core;
 
 import org.aeonbits.owner.Config;
+import org.aeonbits.owner.Config.Sources;
 
 
-@Config.Sources("clastpath:${env}.properties")
+@Sources({"classpath:${env}.properties"})
 public interface Environment extends Config {
 
     String url();
