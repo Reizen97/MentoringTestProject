@@ -91,11 +91,12 @@ public class FiltersTest extends BaseTest {
 
         mainPage.selectCategory("espressomachine");
 
+        productPage.showAllFilters("Merken")
+                .selectFilters("Philips");
+
         List<WebElement> allResults = productPage.getAllProducts();
 
         int expectedNumberOfResults = productPage.getNumbersOfResults();
-
-        System.out.println(expectedNumberOfResults);
 
         assertEquals(expectedNumberOfResults, allResults.size());
     }

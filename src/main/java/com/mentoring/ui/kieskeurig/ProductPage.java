@@ -45,13 +45,11 @@ public class ProductPage extends BasePage {
 
     public List<WebElement> getAllProducts() {
 
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-
         do {
             action().moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector("div.pagination"))))
                     .moveToElement(waitFor(visibilityOfElementLocated(By.cssSelector(".site-footer__copyright"))))
                     .build().perform();
-        } while (js.executeScript("return document.getElementsByClassName('pagination__loading').length").toString().equalsIgnoreCase("1"));
+        } while (getDriver().findElements(By.id("js-product-list-scroll-detection")).size() > 0);
 
 
         return waitFor(visibilityOfAllElementsLocatedBy(By.cssSelector("div.js-product-lists>div.products>article.product-tile.js-product")));
