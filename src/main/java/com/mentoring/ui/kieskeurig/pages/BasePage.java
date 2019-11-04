@@ -1,4 +1,4 @@
-package com.mentoring.ui.kieskeurig;
+package com.mentoring.ui.kieskeurig.pages;
 
 import org.openqa.selenium.By;
 
@@ -7,7 +7,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 
 public class BasePage {
 
-    public void acept() {
+    public void accept() {
 
         waitFor(elementToBeClickable(By.cssSelector("div.modal-consent__right button.js-consent-accept"))).click();
     }

@@ -1,6 +1,7 @@
 package com.mentoring.ui.kieskeurig;
 
 import com.mentoring.ui.BaseTest;
+import com.mentoring.ui.kieskeurig.pages.MainPage;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -17,7 +18,7 @@ public class UIElementsTest extends BaseTest {
 
         openUrl(env.url());
 
-        mainPage.acept();
+        mainPage.accept();
 
         assertTrue(mainPage.isElementVisible(By.cssSelector("a.logo")));
         assertTrue(mainPage.isElementVisible(By.cssSelector("div.site-header__content a.js-show-login")));

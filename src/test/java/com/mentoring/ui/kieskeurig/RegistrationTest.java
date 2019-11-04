@@ -4,6 +4,9 @@ import com.github.javafaker.Faker;
 import com.mentoring.ui.BaseTest;
 import com.mentoring.ui.google.gmail.GmailPage;
 import com.mentoring.ui.google.gmail.LoginPage;
+import com.mentoring.ui.kieskeurig.pages.LoginTabPage;
+import com.mentoring.ui.kieskeurig.pages.MainPage;
+import com.mentoring.ui.kieskeurig.pages.RegisterTabPage;
 import org.junit.jupiter.api.Test;
 
 import static com.mentoring.core.ConciseAPI.openUrl;
@@ -35,7 +38,7 @@ public class RegistrationTest extends BaseTest {
         String login = faker.lorem().fixedString(8).concat(firstName);
         String email = format("ab4180964%s@gmail.com", "+".concat(firstName+lastName));
 
-        mainPage.acept();
+        mainPage.accept();
         mainPage.openLoginFrame();
 
         registerTabPage.openRegistrationTab()

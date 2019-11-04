@@ -1,4 +1,4 @@
-package com.mentoring.ui.kieskeurig;
+package com.mentoring.ui.kieskeurig.pages;
 
 import org.openqa.selenium.By;
 
