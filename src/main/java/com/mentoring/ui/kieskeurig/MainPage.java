@@ -1,5 +1,6 @@
-package com.mentoring.ui.kieskeurig.pages;
+package com.mentoring.ui.kieskeurig;
 
+import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 
 import static com.mentoring.core.ConciseAPI.getDriver;

@@ -1,5 +1,6 @@
-package com.mentoring.ui.kieskeurig.pages;
+package com.mentoring.ui.kieskeurig;
 
+import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 
 import static com.mentoring.core.ConciseAPI.waitFor;
@@ -8,12 +9,6 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 
 
 public class RegisterTabPage extends BasePage {
-
-    public RegisterTabPage openRegistrationTab() {
-
-        waitFor(elementToBeClickable(By.cssSelector("a.js-user-login--register-toggle"))).click();
-        return this;
-    }
 
     public RegisterTabPage inputLogin(String login) {
 

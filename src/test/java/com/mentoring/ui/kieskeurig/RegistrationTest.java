@@ -2,17 +2,17 @@ package com.mentoring.ui.kieskeurig;
 
 import com.github.javafaker.Faker;
 import com.mentoring.ui.BaseTest;
-import com.mentoring.ui.google.gmail.GmailPage;
-import com.mentoring.ui.google.gmail.LoginPage;
-import com.mentoring.ui.kieskeurig.pages.LoginTabPage;
-import com.mentoring.ui.kieskeurig.pages.MainPage;
-import com.mentoring.ui.kieskeurig.pages.RegisterTabPage;
+import com.mentoring.ui.gmail.GmailPage;
+import com.mentoring.ui.gmail.LoginPage;
 import org.junit.jupiter.api.Test;
 
 import static com.mentoring.core.ConciseAPI.openUrl;
 import static com.mentoring.core.ConciseAPI.switchToTab;
 import static com.mentoring.core.Configuration.EMAIL;
+import static com.mentoring.core.Configuration.KIESKEURIG_EMAIL;
+import static com.mentoring.core.Configuration.KIESKEURIG_PASSWORD;
 import static com.mentoring.core.Configuration.PASSWORD;
+import static com.mentoring.helpers.Precondition.precondition;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,8 +28,6 @@ public class RegistrationTest extends BaseTest {
         LoginTabPage loginTabPage = new LoginTabPage();
         MainPage mainPage = new MainPage();
 
-        openUrl(env.url());
-
         Faker faker = new Faker();
 
         String firstName = faker.name().firstName();
@@ -38,10 +36,12 @@ public class RegistrationTest extends BaseTest {
         String login = faker.lorem().fixedString(8).concat(firstName);
         String email = format("ab4180964%s@gmail.com", "+".concat(firstName+lastName));
 
-        mainPage.accept();
-        mainPage.openLoginFrame();
+        precondition().visit(env.url())
+                .accept()
+                .openLoginFrame()
+                .openTab("register").build();
 
-        registerTabPage.openRegistrationTab()
+        registerTabPage
                 .inputLogin(login)
                 .inputFirstName(firstName)
                 .inputLastName(lastName)
@@ -68,11 +68,13 @@ public class RegistrationTest extends BaseTest {
         assertEquals("Bedankt voor het activeren van je account. Je account is nu succesvol geactiveerd.",
                 mainPage.getActivationMessage());
 
-        mainPage.openLoginFrame();
-        loginTabPage.openLoginTab()
-                .inputLogin(email)
-                .inputPassword(password)
-                .login();
+        precondition().visit(env.url())
+                .accept()
+                .openLoginFrame()
+                .openTab("login")
+                .inputLogin(KIESKEURIG_EMAIL)
+                .inputPassword(KIESKEURIG_PASSWORD)
+                .submit("login").build();
 
         String actualUserName = loginTabPage.getUserName();
         assertEquals(login, actualUserName);

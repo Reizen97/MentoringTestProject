@@ -1,10 +1,6 @@
 package com.mentoring.ui.kieskeurig;
 
 import com.mentoring.ui.BaseTest;
-import com.mentoring.ui.kieskeurig.helpers.Precondition;
-import com.mentoring.ui.kieskeurig.pages.LoginTabPage;
-import com.mentoring.ui.kieskeurig.pages.MainPage;
-import com.mentoring.ui.kieskeurig.pages.ProductPage;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 
@@ -12,10 +8,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.mentoring.core.ConciseAPI.openUrl;
 import static com.mentoring.core.Configuration.KIESKEURIG_EMAIL;
 import static com.mentoring.core.Configuration.KIESKEURIG_PASSWORD;
-import static com.mentoring.ui.kieskeurig.helpers.Precondition.*;
+import static com.mentoring.helpers.Precondition.precondition;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -26,17 +21,14 @@ public class FiltersTest extends BaseTest {
 
         MainPage mainPage = new MainPage();
         ProductPage productPage = new ProductPage();
-        LoginTabPage loginTabPage = new LoginTabPage();
 
-        openUrl(env.url());
-
-        mainPage.accept();
-
-        mainPage.openLoginFrame();
-        loginTabPage.openLoginTab()
+        precondition().visit(env.url())
+                .accept()
+                .openLoginFrame()
+                .openTab("login")
                 .inputLogin(KIESKEURIG_EMAIL)
                 .inputPassword(KIESKEURIG_PASSWORD)
-                .login();
+                .submit("login").build();
 
         mainPage.selectCategory("smartphone");
 
@@ -59,17 +51,14 @@ public class FiltersTest extends BaseTest {
 
         MainPage mainPage = new MainPage();
         ProductPage productPage = new ProductPage();
-        LoginTabPage loginTabPage = new LoginTabPage();
 
-        openUrl(env.url());
-
-        mainPage.accept();
-
-        mainPage.openLoginFrame();
-        loginTabPage.openLoginTab()
+        precondition().visit(env.url())
+                .accept()
+                .openLoginFrame()
+                .openTab("login")
                 .inputLogin(KIESKEURIG_EMAIL)
                 .inputPassword(KIESKEURIG_PASSWORD)
-                .login();
+                .submit("login").build();
 
         mainPage.selectCategory("wasmachine");
 
@@ -90,11 +79,9 @@ public class FiltersTest extends BaseTest {
         MainPage mainPage = new MainPage();
         ProductPage productPage = new ProductPage();
 
-        precondition().visit(env.url()).accept().build();
-
-//        openUrl(env.url());
-//
-//        mainPage.accept();
+        precondition().visit(env.url())
+                .accept()
+                .build();
 
         mainPage.selectCategory("espressomachine");
 

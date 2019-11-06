@@ -1,5 +1,6 @@
-package com.mentoring.ui.kieskeurig.pages;
+package com.mentoring.ui.kieskeurig;
 
+import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;

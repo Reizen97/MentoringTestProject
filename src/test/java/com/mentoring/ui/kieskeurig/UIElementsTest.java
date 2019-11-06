@@ -1,11 +1,10 @@
 package com.mentoring.ui.kieskeurig;
 
 import com.mentoring.ui.BaseTest;
-import com.mentoring.ui.kieskeurig.pages.MainPage;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
-import static com.mentoring.core.ConciseAPI.openUrl;
+import static com.mentoring.helpers.Precondition.precondition;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,9 +15,8 @@ public class UIElementsTest extends BaseTest {
 
         MainPage mainPage = new MainPage();
 
-        openUrl(env.url());
-
-        mainPage.accept();
+        precondition().visit(env.url())
+                .accept().build();
 
         assertTrue(mainPage.isElementVisible(By.cssSelector("a.logo")));
         assertTrue(mainPage.isElementVisible(By.cssSelector("div.site-header__content a.js-show-login")));

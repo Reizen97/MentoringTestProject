@@ -1,6 +1,6 @@
 package com.mentoring.ui.suites;
 
-import com.mentoring.ui.google.gmail.MessageTest;
+import com.mentoring.ui.gmail.MessageTest;
 import com.mentoring.ui.google.search.SearchTest;
 import com.mentoring.ui.kieskeurig.FiltersTest;
 import org.junit.platform.runner.JUnitPlatform;

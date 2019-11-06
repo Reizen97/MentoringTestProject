@@ -1,6 +1,6 @@
-package com.mentoring.ui.google.gmail;
+package com.mentoring.ui.gmail;
 
-import com.mentoring.ui.google.BasePage;
+import com.mentoring.ui.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
