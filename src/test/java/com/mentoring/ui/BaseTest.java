@@ -20,7 +20,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
-        ConciseAPI.setDriver(new ChromeDriver());
+        ConciseAPI.setDriver(new ChromeDriver(chromeOptions));
         ConciseAPI.getDriver().manage().window().maximize();
         env = ConfigFactory.create(Environment.class);
     }
