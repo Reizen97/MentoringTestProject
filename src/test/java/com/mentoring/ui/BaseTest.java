@@ -7,6 +7,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 
 public class BaseTest {
@@ -17,6 +18,8 @@ public class BaseTest {
     public void setUp() {
 
         WebDriverManager.chromedriver().setup();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
         ConciseAPI.setDriver(new ChromeDriver());
         ConciseAPI.getDriver().manage().window().maximize();
         env = ConfigFactory.create(Environment.class);
