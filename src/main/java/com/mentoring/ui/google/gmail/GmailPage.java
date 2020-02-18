@@ -3,7 +3,7 @@ package com.mentoring.ui.google.gmail;
 import com.mentoring.ui.google.BasePage;
 import org.openqa.selenium.By;
 
-import static com.mentoring.core.ConciseAPI.waitFor;
+import static com.mentoring.ui.core.ConciseAPI.waitFor;
 import static java.lang.String.format;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;

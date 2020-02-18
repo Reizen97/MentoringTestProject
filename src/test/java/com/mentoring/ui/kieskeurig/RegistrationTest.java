@@ -6,10 +6,10 @@ import com.mentoring.ui.google.gmail.GmailPage;
 import com.mentoring.ui.google.gmail.LoginPage;
 import org.junit.jupiter.api.Test;
 
-import static com.mentoring.core.ConciseAPI.openUrl;
-import static com.mentoring.core.ConciseAPI.switchToTab;
-import static com.mentoring.core.Configuration.EMAIL;
-import static com.mentoring.core.Configuration.PASSWORD;
+import static com.mentoring.ui.core.ConciseAPI.openUrl;
+import static com.mentoring.ui.core.ConciseAPI.switchToTab;
+import static com.mentoring.ui.core.Configuration.EMAIL;
+import static com.mentoring.ui.core.Configuration.PASSWORD;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -3,7 +3,7 @@ package com.mentoring.ui.google.search;
 import com.mentoring.ui.google.BasePage;
 import org.openqa.selenium.By;
 
-import static com.mentoring.core.ConciseAPI.waitFor;
+import static com.mentoring.ui.core.ConciseAPI.waitFor;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 

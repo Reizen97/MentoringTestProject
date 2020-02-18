@@ -1,25 +1,18 @@
-package com.mentoring.core;
+package com.mentoring.ui.core;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.mentoring.core.Configuration.POLLING;
-import static com.mentoring.core.Configuration.TIMEOUT;
+import static com.mentoring.ui.core.Configuration.POLLING;
+import static com.mentoring.ui.core.Configuration.TIMEOUT;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfAllElementsLocatedBy;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 
 public final class ConciseAPI {

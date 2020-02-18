@@ -8,9 +8,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.mentoring.core.ConciseAPI.openUrl;
-import static com.mentoring.core.Configuration.KIESKEURIG_EMAIL;
-import static com.mentoring.core.Configuration.KIESKEURIG_PASSWORD;
+import static com.mentoring.ui.core.ConciseAPI.openUrl;
+import static com.mentoring.ui.core.Configuration.KIESKEURIG_EMAIL;
+import static com.mentoring.ui.core.Configuration.KIESKEURIG_PASSWORD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 

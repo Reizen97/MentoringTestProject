@@ -1,7 +1,7 @@
 package com.mentoring.ui;
 
-import com.mentoring.core.ConciseAPI;
-import com.mentoring.core.Environment;
+import com.mentoring.ui.core.ConciseAPI;
+import com.mentoring.ui.core.Environment;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;

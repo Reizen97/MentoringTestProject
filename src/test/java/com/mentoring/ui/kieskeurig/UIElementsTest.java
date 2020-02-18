@@ -4,7 +4,7 @@ import com.mentoring.ui.BaseTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
-import static com.mentoring.core.ConciseAPI.openUrl;
+import static com.mentoring.ui.core.ConciseAPI.openUrl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

@@ -1,4 +1,4 @@
-package com.mentoring.core;
+package com.mentoring.ui.core;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;

@@ -1,16 +1,15 @@
 package com.mentoring.ui.kieskeurig;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.mentoring.core.ConciseAPI.action;
-import static com.mentoring.core.ConciseAPI.getDriver;
-import static com.mentoring.core.ConciseAPI.waitFor;
+import static com.mentoring.ui.core.ConciseAPI.action;
+import static com.mentoring.ui.core.ConciseAPI.getDriver;
+import static com.mentoring.ui.core.ConciseAPI.waitFor;
 import static java.lang.String.format;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;

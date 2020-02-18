@@ -1,12 +1,10 @@
 package com.mentoring.ui.google.search;
 
 import com.mentoring.ui.BaseTest;
-import com.mentoring.ui.google.search.ResultsPage;
-import com.mentoring.ui.google.search.SearchPage;
 import org.junit.jupiter.api.Test;
 
-import static com.mentoring.core.ConciseAPI.getDriver;
-import static com.mentoring.core.ConciseAPI.openUrl;
+import static com.mentoring.ui.core.ConciseAPI.getDriver;
+import static com.mentoring.ui.core.ConciseAPI.openUrl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchTest extends BaseTest {
