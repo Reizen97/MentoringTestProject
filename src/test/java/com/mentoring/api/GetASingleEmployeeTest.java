@@ -60,6 +60,6 @@ public class GetASingleEmployeeTest extends BaseTest{
         assertEquals("test", employee.getEmployee_name());
         assertEquals("123", employee.getEmployee_salary());
         assertEquals("23", employee.getEmployee_age());
-        assertNull(employee.getImage());
+        assertNull(employee.getProfile_image());
     }
 }

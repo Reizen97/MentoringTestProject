@@ -6,7 +6,7 @@ public class EmployeeResponse {
     private String employee_name;
     private String employee_salary;
     private String employee_age;
-    private String image;
+    private String profile_image;
 
     public String getId() {
         return id;
@@ -40,11 +40,11 @@ public class EmployeeResponse {
         this.employee_age = employee_age;
     }
 
-    public String getImage() {
-        return image;
+    public String getProfile_image() {
+        return profile_image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
     }
 }
