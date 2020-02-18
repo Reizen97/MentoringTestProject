@@ -43,7 +43,33 @@ public class GetASingleEmployeeTest extends BaseTest{
                 .asObject(EmployeeBodyResponse.class)
                 .getStatus();
 
-        assertEquals( 404, actualStatusCode);
+        assertEquals( 401, actualStatusCode);
+    }
+
+    @Test
+    public void testFailedStatus() {
+
+        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", (getEmployeeId() + 1));
+
+        String actualStatus = Unirest.get(url)
+                .asObject(ErrorResponse.class)
+                .getBody()
+                .getStatus();
+
+        assertEquals( "failed", actualStatus);
+    }
+
+    @Test
+    public void testFailedMessage() {
+
+        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", (getEmployeeId() + 1));
+
+        String actualData = Unirest.get(url)
+                .asObject(ErrorResponse.class)
+                .getBody()
+                .getData();
+
+        assertEquals( "Record does not found.", actualData);
     }
 
     @Test
