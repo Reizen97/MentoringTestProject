@@ -1,34 +1,44 @@
 package com.mentoring.api;
 
+import com.google.gson.Gson;
+import com.mentoring.api.request.EmployeeRequest;
+import com.mentoring.api.response.EmployeeBodyResponse;
+import com.mentoring.api.response.EmployeeResponse;
+import com.mentoring.api.response.ErrorResponse;
 import kong.unirest.Unirest;
 import org.junit.jupiter.api.Test;
 
+import static com.mentoring.api.Endpoint.BASE_URL;
+import static com.mentoring.api.Endpoint.CREATE;
+import static com.mentoring.api.Endpoint.GET;
 import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
-public class GetASingleEmployeeTest extends BaseTest{
+public class GetASingleEmployeeTest {
+
+    private EmployeeBodyResponse employee;
+    private Gson gson = new Gson();
+    private String response;
 
     @Test
     public void testSuccessStatus() {
 
-        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", getEmployeeId());
+        createEmployee();
 
-        String actualStatus = Unirest.get(url)
-                .asObject(EmployeeBodyResponse.class)
-                .getBody()
-                .getStatus();
+        response = Unirest.get(format("%s%s%s", BASE_URL.getValue(), GET.getValue(), getEmployeeId()))
+                .asString()
+                .getBody();
 
-        assertEquals("success", actualStatus);
+        assertEquals("success", gson.fromJson(response, EmployeeBodyResponse.class).getStatus());
     }
 
     @Test
     public void testStatusCodeOk() {
 
-        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", getEmployeeId());
+        createEmployee();
 
-        int actualStatusCode = Unirest.get(url)
-                .asObject(EmployeeBodyResponse.class)
+        int actualStatusCode = Unirest.get(format("%s%s%s", BASE_URL.getValue(), GET.getValue(), getEmployeeId()))
+                .asString()
                 .getStatus();
 
         assertEquals( 200, actualStatusCode);
@@ -37,9 +47,9 @@ public class GetASingleEmployeeTest extends BaseTest{
     @Test
     public void testStatusCodeNotFound() {
 
-        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", (getEmployeeId() + 1));
+        createEmployee();
 
-        int actualStatusCode = Unirest.get(url)
+        int actualStatusCode = Unirest.get(format("%s%s%s", BASE_URL.getValue(), GET.getValue(), (getEmployeeId() + 1)))
                 .asObject(EmployeeBodyResponse.class)
                 .getStatus();
 
@@ -49,43 +59,56 @@ public class GetASingleEmployeeTest extends BaseTest{
     @Test
     public void testFailedStatus() {
 
-        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", (getEmployeeId() + 1));
+        createEmployee();
 
-        String actualStatus = Unirest.get(url)
-                .asObject(ErrorResponse.class)
-                .getBody()
-                .getStatus();
+        response = Unirest.get(format("%s%s%s", BASE_URL.getValue(), GET.getValue(), (getEmployeeId() + 1)))
+                .asString()
+                .getBody();
 
-        assertEquals( "failed", actualStatus);
+        assertEquals( "failed", gson.fromJson(response, ErrorResponse.class).getStatus());
     }
 
     @Test
     public void testFailedMessage() {
 
-        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", (getEmployeeId() + 1));
+        createEmployee();
 
-        String actualData = Unirest.get(url)
-                .asObject(ErrorResponse.class)
-                .getBody()
-                .getData();
+        response = Unirest.get(format("%s%s%s", BASE_URL.getValue(), GET.getValue(), (getEmployeeId() + 1)))
+                .asString()
+                .getBody();
 
-        assertEquals( "Record does not found.", actualData);
+        assertEquals( "Record does not found.",  gson.fromJson(response, ErrorResponse.class).getData());
     }
 
     @Test
     public void testEmployeeData() {
 
-        String url = format("http://dummy.restapiexample.com/api/v1/employee/%s", getEmployeeId());
+        createEmployee();
 
-        EmployeeResponse employee = Unirest.get(url)
-                .asObject(EmployeeBodyResponse.class)
-                .getBody()
-                .getData();
+        response = Unirest.get(format("%s%s%s", BASE_URL.getValue(), GET.getValue(), getEmployeeId()))
+                .asString()
+                .getBody();
 
-        assertEquals(getEmployeeId(), employee.getId());
-        assertEquals("test", employee.getEmployee_name());
-        assertEquals("123", employee.getEmployee_salary());
-        assertEquals("23", employee.getEmployee_age());
-        assertNull(employee.getProfile_image());
+        EmployeeResponse expectedEmployee = new EmployeeResponse(getEmployeeId(), "test", "123", "23",
+                null);
+
+        assertEquals(expectedEmployee, gson.fromJson(response, EmployeeBodyResponse.class).getData());
+    }
+
+    private void createEmployee() {
+
+        EmployeeRequest request = new EmployeeRequest("test", "123", "23");
+        String json = gson.toJson(request);
+
+        response = Unirest.post(format("%s%s", BASE_URL.getValue(), CREATE.getValue()))
+                .body(json)
+                .asString()
+                .getBody();
+
+        employee = gson.fromJson(response, EmployeeBodyResponse.class);
+    }
+
+    private String getEmployeeId() {
+        return employee.getData().getId();
     }
 }
