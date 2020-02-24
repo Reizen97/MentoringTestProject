@@ -1,5 +1,6 @@
 package com.mentoring.api;
 
+
 enum Endpoint {
 
     BASE_URL("http://dummy.restapiexample.com"),

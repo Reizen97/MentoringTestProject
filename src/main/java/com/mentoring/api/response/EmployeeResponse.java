@@ -25,9 +25,11 @@ public class EmployeeResponse {
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (!(o instanceof EmployeeResponse)) return false;
         EmployeeResponse that = (EmployeeResponse) o;
+
         return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getName(), that.getName()) &&
                 Objects.equals(getSalary(), that.getSalary()) &&
