@@ -13,7 +13,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class EmployeeResponse {
 
-    private String id;
+    private int id;
     @SerializedName("employee_name")
     private String name;
     @SerializedName("employee_salary")

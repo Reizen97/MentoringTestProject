@@ -109,7 +109,7 @@ public class GetASingleEmployeeTest {
         employee = gson.fromJson(response, EmployeeBodyResponse.class);
     }
 
-    private String getEmployeeId() {
+    private int getEmployeeId() {
         return employee.getData().getId();
     }
 }
