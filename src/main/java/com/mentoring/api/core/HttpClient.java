@@ -1,24 +1,21 @@
 package com.mentoring.api.core;
 
 
-import kong.unirest.GetRequest;
-import kong.unirest.HttpRequest;
-import kong.unirest.RequestBodyEntity;
-import kong.unirest.Unirest;
+import kong.unirest.*;
 
 import static com.mentoring.api.conf.Configuration.BASE_URL;
-import static java.lang.String.format;
 
 
 public final class HttpClient {
 
     public static <T extends HttpRequest> HttpRequest<T> sender(HttpMethod method, String endpoint, String body, Object... parameters) {
 
+        endpoint = parameters.length > 0 ? String.format(endpoint, parameters) : endpoint;
+
         switch (method) {
 
             case GET:
-                get(format(endpoint, parameters));
-                System.out.println(format(endpoint, parameters));
+                get(endpoint);
                 break;
 
             case POST:
@@ -26,11 +23,17 @@ public final class HttpClient {
                 break;
 
             case PUT:
-                put(format(endpoint, parameters), body);
+                put(endpoint, body);
                 break;
 
-            default: throw new IllegalArgumentException("Only GET, POST, PUT, DELETE allowed");
+            case DELETE:
+                delete(endpoint);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Only GET, POST, PUT, DELETE allowed");
         }
+
         return null;
     }
 
@@ -50,5 +53,9 @@ public final class HttpClient {
     private static HttpRequest<RequestBodyEntity> put(String endpoint, String body) {
         return Unirest.put(BASE_URL + endpoint)
                 .body(body);
+    }
+
+    private static HttpRequest<HttpRequestWithBody> delete(String endpoint) {
+        return Unirest.delete(BASE_URL + endpoint);
     }
 }

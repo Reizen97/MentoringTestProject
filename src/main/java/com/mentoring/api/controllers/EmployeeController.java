@@ -20,7 +20,7 @@ public class EmployeeController {
         return HttpClient.sender(GetEmployeeById.getMethod(), GetEmployeeById.getEndpoint(), body, id);
     }
 
-    public static HttpRequest<RequestBodyEntity> createEmployee(String body) {
-        return HttpClient.sender(CreateEmployee.getMethod(), CreateEmployee.getEndpoint(), body, null);
+    public static HttpRequest<RequestBodyEntity> createNewEmployee(String body) {
+        return HttpClient.sender(CreateEmployee.getMethod(), CreateEmployee.getEndpoint(), body, "");
     }
 }

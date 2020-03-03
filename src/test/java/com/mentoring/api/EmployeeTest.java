@@ -29,7 +29,7 @@ public class EmployeeTest {
         EmployeeRequest request = new EmployeeRequest("test", "123", "23");
         String json = gson.toJson(request);
 
-        response = EmployeeController.createEmployee(json)
+        response = EmployeeController.createNewEmployee(json)
                 .asString()
                 .getBody();
 
