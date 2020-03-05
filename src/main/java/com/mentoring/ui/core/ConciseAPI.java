@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import static com.mentoring.ui.core.Configuration.POLLING;
 import static com.mentoring.ui.core.Configuration.TIMEOUT;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 
 public final class ConciseAPI {

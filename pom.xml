@@ -87,6 +87,12 @@
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>4.0.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

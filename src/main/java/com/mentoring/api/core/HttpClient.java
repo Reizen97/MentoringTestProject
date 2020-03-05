@@ -1,8 +1,8 @@
 package com.mentoring.api.core;
 
-
 import kong.unirest.GetRequest;
 import kong.unirest.HttpRequest;
+import kong.unirest.HttpRequestWithBody;
 import kong.unirest.RequestBodyEntity;
 import kong.unirest.Unirest;
 
@@ -12,29 +12,34 @@ import static java.lang.String.format;
 
 public final class HttpClient {
 
-    public static <T extends HttpRequest> HttpRequest<T> sender(HttpMethod method, String endpoint, String body, Object... parameters) {
+    private static HttpRequest<? extends HttpRequest> response;
+
+    public static HttpRequest<? extends HttpRequest> sender(HttpMethod method, String endpoint, String body, Object... parameters) {
 
         switch (method) {
 
             case GET:
-                get(format(endpoint, parameters));
-                System.out.println(format(endpoint, parameters));
+                response = get(format(endpoint, parameters));
                 break;
 
             case POST:
-                post(endpoint, body);
+                response = post(endpoint, body);
                 break;
 
             case PUT:
-                put(format(endpoint, parameters), body);
+                response = put(format(endpoint, parameters), body);
+                break;
+
+            case DELETE:
+                response = delete(format(endpoint, parameters));
                 break;
 
             default: throw new IllegalArgumentException("Only GET, POST, PUT, DELETE allowed");
         }
-        return null;
+        return response;
     }
 
-    public static <T extends HttpRequest> HttpRequest<T> sender(HttpMethod method, String endpoint, Object... parameters) {
+    public static HttpRequest<? extends HttpRequest> sender(HttpMethod method, String endpoint, Object... parameters) {
         return sender(method, endpoint, null, parameters);
     }
 
@@ -50,5 +55,9 @@ public final class HttpClient {
     private static HttpRequest<RequestBodyEntity> put(String endpoint, String body) {
         return Unirest.put(BASE_URL + endpoint)
                 .body(body);
+    }
+
+    private static HttpRequest<HttpRequestWithBody> delete(String endpoint) {
+        return Unirest.delete(BASE_URL + endpoint);
     }
 }
